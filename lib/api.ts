@@ -1,3 +1,5 @@
+'use client';
+
 import axios from "axios";
 import type { Note, NoteId } from "../types/note"
 
