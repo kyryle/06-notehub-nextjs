@@ -1,7 +1,9 @@
 'use client';
 
-export default function Error(err: string) {
+export default function Error(error: Error) {
+    console.log(error);
+    
     return (
-        alert(err)
+        <p>error has occured</p>
     )
 }

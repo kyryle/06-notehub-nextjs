@@ -36,7 +36,8 @@ export default function NoteForm({ onClose }: NoteFormProps) {
       onClose()
     },
     onError(err) {
-  alert(err)
+      console.log(err);
+  alert("something went wrong")
 }
   })
   const handleSubmit = (values: FormValues, helpers: FormikHelpers<FormValues>) => {

@@ -3,7 +3,7 @@ import Link from "next/link"
 
 
 export default function Header() {
-    return (<header>
+    return (
             <header className={css.header}>
       <Link href="/">
         NoteHub
@@ -18,7 +18,6 @@ export default function Header() {
           </li>
         </ul>
       </nav>
-    </header>
     </header>
     )
 }

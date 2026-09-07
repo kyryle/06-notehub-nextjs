@@ -1,5 +1,3 @@
-"use client";
-
 import axios from "axios";
 import type { Note, NoteId } from "../types/note"
 
@@ -61,5 +59,18 @@ export const deleteNote = async (id: NoteId) => {
         }
     })
     return result.data
+
+}
+
+export const fetchNoteById = async (id: NoteId) => {
+    const result = await axios.get<Note>(`https://notehub-public.goit.study/api/notes/${id}`, {
+        headers: {
+            Authorization: `Bearer ${myKey}`
+        }
+    })
+    console.log(result);
+    
+    return result.data
+    
 
 }
