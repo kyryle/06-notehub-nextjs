@@ -1,0 +1,7 @@
+
+
+export default function Error(err: string) {
+    return (
+        alert(err)
+    )
+}
