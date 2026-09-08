@@ -1,9 +1,14 @@
 'use client';
 
-export default function Error(error: Error) {
-    console.log(error);
+interface ErrorProps {
+    error: Error
+}
+
+export default function Error({error}: ErrorProps) {
     
     return (
-        <p>error has occured</p>
+        <>
+        <p>error has occured {error.message}</p>
+        </>
     )
 }

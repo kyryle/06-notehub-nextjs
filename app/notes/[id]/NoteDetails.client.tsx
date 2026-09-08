@@ -2,20 +2,23 @@
 
 import { useQuery } from "@tanstack/react-query"
 import css from "../../../components/NoteList/NoteList.module.css"
-import type { Note } from "../../../types/note"
-import { fetchNotes } from "@/lib/api"
+import { fetchNoteById } from "@/lib/api"
+
+interface NoteDetailsProps {
+  id: string
+}
 
 
-export default function NoteDetails(note: Note) {
+export default function NoteDetails({id}: NoteDetailsProps) {
 
- const {data} = useQuery({
-          queryKey: ["noteQuery", {search: "",page: 1}],
-          queryFn: () => fetchNotes("", 1),
+ const {data: note, isError } = useQuery({
+          queryKey: ["singleNote", id],
+          queryFn: () => fetchNoteById(id),
           refetchOnMount: false,
-  
  })
-  console.log(data);
-  
+  if (isError || !note) {
+    return <p>заметка не найдена</p>
+  }
   
     return (
         <li className={css.listItem} key={note.id}>

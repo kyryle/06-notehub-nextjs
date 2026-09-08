@@ -43,6 +43,7 @@ export const fetchNotes = async (search: string, page: number) => {
 }
 
 export const createNote = async (data: NoteData) => {
+    try {
     const result = await axios.post<Note>(`https://notehub-public.goit.study/api/notes`, data, {
         headers: {
             Authorization: `Bearer ${myKey}`
@@ -50,9 +51,20 @@ export const createNote = async (data: NoteData) => {
     })
     return result.data
 
+} catch (err) {
+        console.log(err);
+        return (
+            {
+                notes: [],
+                totalPages: 0
+            }
+        )
+
+    }
 }
 
 export const deleteNote = async (id: NoteId) => {
+    try {
     const result = await axios.delete<Note>(`https://notehub-public.goit.study/api/notes/${id}`, {
         headers: {
             Authorization: `Bearer ${myKey}`
@@ -60,17 +72,31 @@ export const deleteNote = async (id: NoteId) => {
     })
     return result.data
 
+} catch (err) {
+        console.log(err);
+        return (
+            {
+                notes: [],
+                totalPages: 0
+            }
+        )
+
+    }
 }
 
 export const fetchNoteById = async (id: NoteId) => {
+    try {
     const result = await axios.get<Note>(`https://notehub-public.goit.study/api/notes/${id}`, {
         headers: {
             Authorization: `Bearer ${myKey}`
         }
     })
-    console.log(result);
     
     return result.data
     
 
+} catch (err) {
+        console.log(err);
+        throw err
+    }
 }

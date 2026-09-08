@@ -29,7 +29,7 @@ const formSchema = yup.object().shape({
 export default function NoteForm({ onClose }: NoteFormProps) {
   const queryClient = useQueryClient()
 
-  const { mutate } = useMutation({
+  const { mutate, isSuccess } = useMutation({
     mutationFn: createNote,
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: ["noteQuery"] })
@@ -41,7 +41,9 @@ export default function NoteForm({ onClose }: NoteFormProps) {
 }
   })
   const handleSubmit = (values: FormValues, helpers: FormikHelpers<FormValues>) => {
+    if (isSuccess) {
     helpers.resetForm()
+    }
     console.log(values);
     
     mutate( values )
@@ -62,7 +64,6 @@ export default function NoteForm({ onClose }: NoteFormProps) {
     <label htmlFor="title">Title</label>
             <Field id="title" type="text" name="title" className={css.input} />
             <ErrorMessage name="title" className={css.error} component={'p'}/>
-    {/* <span className={css.error} /> */}
   </div>
 
   <div className={css.formGroup}>
@@ -75,7 +76,6 @@ export default function NoteForm({ onClose }: NoteFormProps) {
       className={css.textarea}
             />
             <ErrorMessage name="content" className={css.error} component={'p'}/>
-    {/* <span className={css.error} /> */}
   </div>
 
   <div className={css.formGroup}>
@@ -88,7 +88,6 @@ export default function NoteForm({ onClose }: NoteFormProps) {
       <option value="Shopping">Shopping</option>
             </Field>
             <ErrorMessage name="tag" className={css.error} component={'p'}/>
-    {/* <span className={css.error} /> */}
   </div>
 
   <div className={css.actions}>
