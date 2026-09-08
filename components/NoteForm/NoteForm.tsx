@@ -29,7 +29,7 @@ const formSchema = yup.object().shape({
 export default function NoteForm({ onClose }: NoteFormProps) {
   const queryClient = useQueryClient()
 
-  const { mutate, isSuccess } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: createNote,
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: ["noteQuery"] })
@@ -41,10 +41,7 @@ export default function NoteForm({ onClose }: NoteFormProps) {
 }
   })
   const handleSubmit = (values: FormValues, helpers: FormikHelpers<FormValues>) => {
-    if (isSuccess) {
-    helpers.resetForm()
-    }
-    console.log(values);
+    console.log(helpers);
     
     mutate( values )
   }
@@ -97,7 +94,7 @@ export default function NoteForm({ onClose }: NoteFormProps) {
     <button
       type="submit"
       className={css.submitButton}
-      disabled={false}
+      disabled={isPending}
     >
       Create note
     </button>

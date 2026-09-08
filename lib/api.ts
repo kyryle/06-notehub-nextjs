@@ -53,12 +53,7 @@ export const createNote = async (data: NoteData) => {
 
 } catch (err) {
         console.log(err);
-        return (
-            {
-                notes: [],
-                totalPages: 0
-            }
-        )
+        throw err
 
     }
 }
@@ -74,12 +69,7 @@ export const deleteNote = async (id: NoteId) => {
 
 } catch (err) {
         console.log(err);
-        return (
-            {
-                notes: [],
-                totalPages: 0
-            }
-        )
+        throw err
 
     }
 }
